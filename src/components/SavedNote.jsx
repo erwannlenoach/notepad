@@ -3,7 +3,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-class Save extends React.Component {
+class SavedNote extends React.Component {
   constructor() {
     super();
   }
@@ -26,4 +26,4 @@ class Save extends React.Component {
   }
 }
 
-export { Save }
+export { SavedNote }

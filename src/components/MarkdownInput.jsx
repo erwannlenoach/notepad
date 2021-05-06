@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { NoteDisplay } from './NoteDisplay'
-import { Save } from './Save'
+import { SavedNote } from './SavedNote'
 import Showdown from 'showdown';
 
 const converter = new Showdown.Converter();
@@ -10,13 +10,13 @@ const converter = new Showdown.Converter();
 class MarkdownInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', text: '', valueSaved: '', textSaved: '' };
-    this.onSubmitForm = this.onSubmitForm.bind(this);
+    this.state = { value: '', text: '',titleSaved: '', textSaved: '' };
+    this.onSubmitTitle = this.onSubmitTitle.bind(this);
     this.onSubmitText = this.onSubmitText.bind(this);
     this.onSavedText = this.onSavedText.bind(this);
   }
 
-  onSubmitForm(event) {
+  onSubmitTitle(event) {
     this.setState({ value: event.target.value });
     console.log(this.state.value)
     localStorage.setItem('titleStored', this.state.value);
@@ -28,10 +28,9 @@ class MarkdownInput extends React.Component {
     localStorage.setItem('textStored', this.state.text);
   }
 
-
   onSavedText() {
 
-    this.setState({ valueSaved: localStorage.getItem('titleStored') });
+    this.setState({ titleSaved: localStorage.getItem('titleStored') });
     this.setState({ textSaved: localStorage.getItem('textStored') });
     console.log(this.state.valueSaved)
     console.log(this.state.textSaved)
@@ -39,7 +38,11 @@ class MarkdownInput extends React.Component {
 
   render() {
 
-
+    const mystyle = {
+      backgroundColor: "Black",
+      padding: "10px",
+      fontFamily: "Arial"
+    };
 
     const noteTitle = converter.makeHtml(this.state.value)
     const notes = converter.makeHtml(this.state.text)
@@ -48,34 +51,24 @@ class MarkdownInput extends React.Component {
 
     return (
       <>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm">
-              <Save title={this.state.valueSaved} content={this.state.textSaved} />
+        <div className="container" style={mystyle}>
+          <div className="row">
+            <div className="col-sm">
+              <SavedNote title={this.state.titleSaved} content={this.state.textSaved} />
             </div>
 
-            <div class="col-sm">
+            <div className="col-sm">
               <div className="card" >
                
                 <NoteDisplay title={noteTitle} content={notes} />
               </div>
 
               <div className="card">
-
-                <div className="card-body">
-                  <h5 className="card-title" dangerouslySetInnerHTML={{ __html: this.props.title }} ></h5>
-                  <p className="card-text" dangerouslySetInnerHTML={{ __html: this.props.content }} ></p>
-
-                </div>
-              </div>
-
-
-              <div className="card">
                 <div className='card-body'>
                   <form onSubmit={this.handleSubmit}>
                     <div className='card-title'>
                       <h1>Nouvelle note</h1>
-                      <input placeholder="écris un titre" type="text" value={this.state.value} onChange={this.onSubmitForm} />
+                      <input placeholder="écris un titre" type="text" value={this.state.value} onChange={this.onSubmitTitle} />
                     </div>
                     <div className='card-text'>
                       <textarea placeholder="écris ta note" className="card-text" type="text" value={this.state.text} onChange={this.onSubmitText} />
@@ -84,6 +77,9 @@ class MarkdownInput extends React.Component {
                   <button type="button" className="btn btn-primary" onClick={this.onSavedText}>Sauvegarder</button>
                 </div>
               </div>
+
+
+   
             </div>
           </div>
         </div>
@@ -92,7 +88,7 @@ class MarkdownInput extends React.Component {
 
 
       </>
-    );
+    )
   }
 }
 
