@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { NoteDisplay } from './NoteDisplay'
 import Showdown from 'showdown';
@@ -17,15 +17,21 @@ class MarkdownInput extends React.Component {
   onSubmitForm(event) {
     this.setState({ value: event.target.value });
     console.log(this.state.value)
+    localStorage.setItem('titleStored', this.state.value);
   }
 
   onSubmitText(event) {
     this.setState({ text: event.target.value });
     console.log(this.state.text)
+    localStorage.setItem('textStored', this.state.text);
   }
+
+  
+
 
 
   render() {
+
 
     const noteTitle = converter.makeHtml(this.state.value)
     const notes = converter.makeHtml(this.state.text)
