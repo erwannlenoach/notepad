@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { NoteDisplay } from './NoteDisplay'
+import { Save } from './Save'
 import Showdown from 'showdown';
 
 const converter = new Showdown.Converter();
@@ -9,9 +10,10 @@ const converter = new Showdown.Converter();
 class MarkdownInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', text: '' };
+    this.state = { value: '', text: '', valueSaved: '', textSaved: '' };
     this.onSubmitForm = this.onSubmitForm.bind(this);
     this.onSubmitText = this.onSubmitText.bind(this);
+    this.onSavedText = this.onSavedText.bind(this);
   }
 
   onSubmitForm(event) {
@@ -26,11 +28,17 @@ class MarkdownInput extends React.Component {
     localStorage.setItem('textStored', this.state.text);
   }
 
-  
 
+  onSavedText() {
 
+    this.setState({ valueSaved: localStorage.getItem('titleStored') });
+    this.setState({ textSaved: localStorage.getItem('textStored') });
+    console.log(this.state.valueSaved)
+    console.log(this.state.textSaved)
+  }
 
   render() {
+
 
 
     const noteTitle = converter.makeHtml(this.state.value)
@@ -40,11 +48,17 @@ class MarkdownInput extends React.Component {
 
     return (
       <>
+        <div>
+         
+          <Save title={this.state.valueSaved} content={this.state.textSaved}/>
+        </div>
         <div className="row">
+        <h1>Ma note</h1>
           <NoteDisplay title={noteTitle} content={notes} />
         </div>
 
         <div className="card">
+      
           <div className="card-body">
             <h5 className="card-title" dangerouslySetInnerHTML={{ __html: this.props.title }} ></h5>
             <p className="card-text" dangerouslySetInnerHTML={{ __html: this.props.content }} ></p>
@@ -66,7 +80,7 @@ class MarkdownInput extends React.Component {
           </div>
         </div>
         <div className='row'>
-          <button type="button" className="btn btn-primary">Sauvegarder</button>
+          <button type="button" className="btn btn-primary" onClick={this.onSavedText}>Sauvegarder</button>
         </div>
       </>
     );
