@@ -18,14 +18,14 @@ class MarkdownInput extends React.Component {
 
   onSubmitTitle(event) {
     this.setState({ value: event.target.value });
-    console.log(this.state.value)
-    localStorage.setItem('titleStored', this.state.value);
+    localStorage.setItem('titleStored', event.target.value);
   }
+
+  
 
   onSubmitText(event) {
     this.setState({ text: event.target.value });
-    console.log(this.state.text)
-    localStorage.setItem('textStored', this.state.text);
+    localStorage.setItem('textStored', event.target.value);
   }
 
   onSavedText() {
