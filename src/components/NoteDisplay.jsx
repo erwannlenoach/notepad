@@ -2,30 +2,36 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 class NoteDisplay extends React.Component {
-    constructor() {
-        super();
-        this.state = {value: ''};
+  constructor() {
+    super();
+    this.state = { value: '' };
 
-      }
-    
-      onChange(event) {
-        this.setState({value: event.target.value});
-        event.preventDefault();
-      }
+  }
 
-   
-    render() {
+  onChange(event) {
+    this.setState({ value: event.target.value });
+    event.preventDefault();
+  }
+
+
+  render() {
 
   
-   
-        return (
-            <>
-              <h1>Title: {this.props.title}</h1>
-              <div>Text: {this.props.content}</div>
-            </> 
-        )
-    }
+
+    return (
+      <>
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title" dangerouslySetInnerHTML={{ __html: this.props.title }} ></h5>
+            <p className="card-text" dangerouslySetInnerHTML={{ __html: this.props.content }} ></p>
+
+          </div>
+        </div>
+      </>
+    )
+  }
 }
 
-export {NoteDisplay}
+export { NoteDisplay }
