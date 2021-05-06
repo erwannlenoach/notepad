@@ -48,40 +48,49 @@ class MarkdownInput extends React.Component {
 
     return (
       <>
-        <div>
-         
-          <Save title={this.state.valueSaved} content={this.state.textSaved}/>
-        </div>
-        <div className="row">
-        <h1>Ma note</h1>
-          <NoteDisplay title={noteTitle} content={notes} />
-        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <Save title={this.state.valueSaved} content={this.state.textSaved} />
+            </div>
 
-        <div className="card">
-      
-          <div className="card-body">
-            <h5 className="card-title" dangerouslySetInnerHTML={{ __html: this.props.title }} ></h5>
-            <p className="card-text" dangerouslySetInnerHTML={{ __html: this.props.content }} ></p>
+            <div class="col-sm">
+              <div className="card" >
+               
+                <NoteDisplay title={noteTitle} content={notes} />
+              </div>
 
+              <div className="card">
+
+                <div className="card-body">
+                  <h5 className="card-title" dangerouslySetInnerHTML={{ __html: this.props.title }} ></h5>
+                  <p className="card-text" dangerouslySetInnerHTML={{ __html: this.props.content }} ></p>
+
+                </div>
+              </div>
+
+
+              <div className="card">
+                <div className='card-body'>
+                  <form onSubmit={this.handleSubmit}>
+                    <div className='card-title'>
+                      <h1>Nouvelle note</h1>
+                      <input placeholder="écris un titre" type="text" value={this.state.value} onChange={this.onSubmitForm} />
+                    </div>
+                    <div className='card-text'>
+                      <textarea placeholder="écris ta note" className="card-text" type="text" value={this.state.text} onChange={this.onSubmitText} />
+                    </div>
+                  </form>
+                  <button type="button" className="btn btn-primary" onClick={this.onSavedText}>Sauvegarder</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
 
-        <div className="card">
-          <div className='card-body'>
-            <form onSubmit={this.handleSubmit}>
-              <div className='card-title'>
-                <input type="text" value={this.state.value} onChange={this.onSubmitForm} />
-              </div>
-              <div className='card-text'>
-                <textarea className="card-text" type="text" value={this.state.text} onChange={this.onSubmitText} />
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className='row'>
-          <button type="button" className="btn btn-primary" onClick={this.onSavedText}>Sauvegarder</button>
-        </div>
+
+
       </>
     );
   }

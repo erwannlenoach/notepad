@@ -18,7 +18,7 @@ class Save extends React.Component {
             <h1>Mes notes enregistrées</h1>
           <div className="card-body">
             <h5 className="card-title" dangerouslySetInnerHTML={{ __html: this.props.title }} ></h5>
-            <p className="card-text" dangerouslySetInnerHTML={{ __html: this.props.content }} ></p>
+            <p className="card-subtitle" dangerouslySetInnerHTML={{ __html: this.props.content }} ></p>
           </div>
         </div>
       </>
