@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class MarkdownInput extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {value: ''};
         this.onSubmitForm = this.onSubmitForm.bind(this);
       }

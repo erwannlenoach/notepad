@@ -4,15 +4,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {MarkdownInput} from "./MarkdownInput.jsx"
 
 class NoteDisplay extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {value: ''};
-        this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
+     
+
       }
     
-      handleChange(event) {
+      onChange(event) {
         this.setState({value: event.target.value});
+        event.preventDefault();
       }
 
    
@@ -20,22 +22,27 @@ class NoteDisplay extends React.Component {
         this.setState({ values })
       }
     
+      
 
     render() {
-       
-  const { values } = this.state;
 
-      if(values == null){
-        console.log("null")
-      }
+      var values = this.state
+   
 
-  let content = values
-  
+      var myJSON = JSON.stringify(values);
+
+   
+    
+     // let Arr = ["vos notes"]
+    //  Arr.unshift(values.value)
+  console.log(myJSON)
+
+   
         return (
             <>
-             
-            <MarkdownInput value={this.state.value}
-            onFormSubmit={this.submitForm}
+              <div>Input value{myJSON}</div>
+            <MarkdownInput 
+            onFormSubmit={this.submitForm}  value={this.state.value} onChange={this.onChange}
           /> 
             </> 
         )
