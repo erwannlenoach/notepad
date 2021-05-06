@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {NoteDisplay} from './components/NoteDisplay.jsx'
+import {NoteDisplay} from '../src/components/NoteDisplay'
 
-const App = () => <NoteDisplay />;
+import { MarkdownInput } from '../src/components/MarkdownInput';
+
+const App = () => {
+    return <>
+ 
+    <MarkdownInput/>;
+    </>
+
+}
 
 ReactDOM.render(<App />, document.querySelector('#root'));
